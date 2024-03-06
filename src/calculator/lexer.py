@@ -41,6 +41,21 @@ class Lexer:
 
          return Token(TokenType.NUMBER, lexeme), pos
       
+   def get_token(self, text, pos):
+        """Extract token from text starting at pos."""
+        lexeme = ""
+        length = len(text)
+        if pos >= length:
+            return Token(TokenType.EMPTY, lexeme), pos
+
+        if text[pos].isdigit():
+            return self.get_number(text, pos)
+        elif text[pos] in ['+', '-', '*', '/', '^', '(', ')']:
+            lexeme = text[pos]
+            return Token(TokenType.from_symbol(lexeme), lexeme), pos + 1
+        else:
+            return Token(TokenType.ERROR, lexeme), pos + 1
+      
 
    def get_add_op(self, text, pos):
       """Extract an addition operator."""

@@ -51,3 +51,40 @@ def test_get_add_op(text, pos, expected_token, expected_pos):
     #Assert
     assert token == expected_token
     assert new_pos == expected_pos
+
+@pytest.mark.parametrize(
+    "text, pos, expected_token, expected_pos",
+    [
+        ("*", 0, Token(TokenType.MUL_OP, "*"), 1),
+        ("/", 0, Token(TokenType.MUL_OP, "/"), 1),
+    ]
+)
+def test_get_mul_op(lexer, text, pos, expected_token, expected_pos):
+    """Test get_mul_op method."""
+    token, new_pos = lexer.get_token(text, pos)
+    assert token == expected_token
+    assert new_pos == expected_pos
+
+@pytest.mark.parametrize(
+    "text, pos, expected_token, expected_pos",
+    [
+        ("^", 0, Token(TokenType.POWER_OP, "^"), 1),
+    ]
+)
+def test_get_power_op(lexer, text, pos, expected_token, expected_pos):
+    """Test get_power_op method."""
+    token, new_pos = lexer.get_token(text, pos)
+    assert token == expected_token
+    assert new_pos == expected_pos
+
+@pytest.mark.parametrize(
+    "text, pos, expected_token, expected_pos",
+    [
+        ("!", 0, Token(TokenType.FAC_OP, "!"), 1),
+    ]
+)
+def test_get_fac_op(lexer, text, pos, expected_token, expected_pos):
+    """Test get_fac_op method."""
+    token, new_pos = lexer.get_token(text, pos)
+    assert token == expected_token
+    assert new_pos == expected_pos
